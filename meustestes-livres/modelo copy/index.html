@@ -1,20 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Título da página</title>
+    <title>Document</title>
 </head>
 <body>
-    <input type="number" id="txtn">
-    <button id="btn">teste</button>
-    
+
+    <button id="btn01">Deletar elemento</button>
+
     <script>
-         window.btn.onclick = function  () {
-            let numero = Number(window.txtn.value) 
-            
-            alert(typeof numero)
+        let btnDeleteElement = document.getElementById('btn01')
+        let res = document.createElement('div')
+        let divtxt = document.createTextNode('Esse texto vai ser deletado ao apertar o botão')
+
+        document.body.appendChild(res).appendChild(divtxt)
+
+        btnDeleteElement.onclick = function() {
+            res.remove()
         }
     </script>
 </body>
