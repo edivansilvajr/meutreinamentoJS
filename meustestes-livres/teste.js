@@ -1,5 +1,3 @@
-let valores = [5, 8, 2, 9, 3]
+let idade = 16
 
-valores.splice(2,1)
-console.log(valores)
-
+console.log(idade > 17 ? 'Você é de maior' : 'Você é de menor')
