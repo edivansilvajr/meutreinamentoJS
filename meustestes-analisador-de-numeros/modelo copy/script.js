@@ -1,48 +1,64 @@
-let txtn = window.document.getElementById('txtn')
-let list = window.document.getElementById('sellist')
-let res = window.document.getElementById('res')
-let valores = []
+let txtn = document.querySelector('input#txtn')
+let selList = document.querySelector('select#selList')
+let res = document.querySelector('div#res')
+let btnAdicionar = document.querySelector('input#btnAdicionar')
+let btnFinalizar = document.querySelector('input#btnFinalizar')
+let btnLimpar = document.querySelector('input#btnLimpar')
+let numberList = []
 
-function adicionar() {
+btnAdicionar.onclick = function () {
     let n = Number(txtn.value)
 
-    if(txtn.value < 1 || txtn.value > 100 || valores.indexOf(n) != -1) {
-        alert('[ERRO] Valor inválido ou ja encontrado na lista')
+    if (txtn.value.length == 0) {
+        alert('O campo "Número" não pode ficar vazio')
+    } else if (n < 1 || n >= 100) {
+        alert('Número inválido, digite um número entre 1 e 100')
     } else {
-        let item = window.document.createElement('option')
+        let item = document.createElement('option')
 
-        valores.push(n)
-        item.text = `Valor ${n} adicionado`
+        if (numberList.indexOf(n) == -1) {
+            numberList.push(n)
 
-        list.appendChild(item)
+            item.text = `Valor ${n} adicionado`
+
+            selList.appendChild(item)
+        } else {
+            alert('Número já se encontr na lista')
+        }
+
     }
     txtn.value = ''
     txtn.focus()
     res.innerHTML = ''
 }
 
-function finalizar() {
-    let maior = valores[0]
-    let menor = valores[0]
+btnFinalizar.onclick = function () {
+    let maior = numberList[0]
+    let menor = numberList[0]
     let soma = 0
 
-    for(let pos in valores) {
-        if(maior < valores[pos]) {
-            maior = valores[pos]
+    for (let pos in numberList) {
+        if (maior < numberList[pos]) {
+            maior = numberList[pos]
         }
 
-        if(menor > valores[pos]) {
-            menor = valores[pos]
+        if (menor > numberList[pos]) {
+            menor = numberList[pos]
         }
 
-        soma+= valores[pos]
+        soma += numberList[pos]
     }
-
-    res.innerHTML = `<p>Ao todo temos ${valores.length} números cadastrados</p>`
+    res.innerHTML = `<p>Ao todo são ${numberList.length} números cadastrados</p>`
     res.innerHTML += `<p>O maior número cadastrado foi ${maior}</p>`
     res.innerHTML += `<p>O menor número cadastrado foi ${menor}</p>`
     res.innerHTML += `<p>Somando todos os valores temos ${soma}</p>`
-    res.innerHTML += `A média entres os valores é ${soma / valores.length}`
-    
+    res.innerHTML += `A média dos valores digitados é ${soma / numberList.length}`
+
+    txtn.focus()
+}
+
+btnLimpar.onclick = function () {
+    numberList = []
+    selList.innerHTML = ''
     txtn.focus()
 }
