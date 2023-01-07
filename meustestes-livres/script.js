@@ -65,6 +65,17 @@ btnPrev.onclick = function () {
     displayPrevImage()
 }
 
+// Configura os eventos de mouseover e mouseout nas imagens
+for(let i = 0; i < images.length; i++) {
+    images[i].onmouseover = function () {
+        stopSlide()
+    }
+
+    images[i].onmouseout = () => {
+        slideInterval = setInterval(displayNextImage, 2000)
+    }
+}
+
 // Configura os eventos de mouseover e mouseout nos botões
 btnNext.onmouseover = function () {
     stopSlide()
@@ -86,7 +97,7 @@ btnPrev.onmouseout = function () {
     }, 2000)
 }
 
-// Configura os eventos de mouseover nos botões de indicação
+// Configura os eventos de mouseover e mouseout nos botões de indicação
 containerIndicators.onmouseover = function () {
     stopSlide()
 }
