@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+div.sliderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div#caroussel {
+    position: relative;
+}
+
+div#caroussel > button#prev {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-left: 10px;
+    font-size: xx-large;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+div#caroussel > button#next {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-right: 10px;
+    font-size: xx-large;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+div.sliderContainer > #containerIndicators {
+    position: absolute;
+    margin-bottom: 1%;
+    align-self: flex-end;
+    
+}
