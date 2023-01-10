@@ -1,49 +1,45 @@
-// Declare as variáveis
 let images = document.querySelectorAll('div#caroussel > img')
-let btnNext = document.querySelector('button#next')
 let btnPrev = document.querySelector('button#prev')
+let btnNext = document.querySelector('button#next')
 let containerIndicators = document.querySelector('div#containerIndicators')
 let imageIndex = 0
-let slideInterval
 
-// Cria os botões de indicação das imagens
-function createIndicatorButtons() {
+function createIndicators() {
     for (let i = 0; i < images.length; i++) {
         let radio = document.createElement('input')
         radio.type = 'radio'
-        radio.name = 'indicador'
+        radio.name = 'indicator'
         radio.value = i
-        radio.id = `indicador-${i}`
-        radio.style.diplay = 'inline-block'
-        radio.style.marginRight = '10px'
+        radio.id = `indicator-${i}`
         radio.style.verticalAlign = 'middle'
+        radio.style.marginRight = '10px'
         containerIndicators.appendChild(radio)
 
-        radio.addEventListener('change', () => {
-            imageIndex = i
+        radio.onchange = () => {
+            if (radioIndicators[i].checked = true) {
+                imageIndex = i
+            }
             displayCurrentImage()
-        })
+        }
     }
+
 }
 
-// Exibe a imagem atual
 function displayCurrentImage() {
     for (let i = 0; i < images.length; i++) {
         images[i].style.display = 'none'
-        radioButtons[i].checked = false
+        radioIndicators[i].checked = false
     }
-    radioButtons[imageIndex].checked = true
+    radioIndicators[imageIndex].checked = true
     images[imageIndex].style.display = 'block'
 }
 
-// Exibe a próxima imagem
-function displayNextImage() {
+function nextImage() {
     imageIndex = (imageIndex + 1) % images.length
     displayCurrentImage()
 }
 
-// Exibe a imagem anterior
-function displayPrevImage() {
+function prevImage() {
     imageIndex--
     if (imageIndex < 0) {
         imageIndex = images.length - 1
@@ -51,74 +47,54 @@ function displayPrevImage() {
     displayCurrentImage()
 }
 
-// Pausa o slide
 function stopSlide() {
-    clearInterval(slideInterval)
+    clearInterval(automaticSlide)
 }
 
-// Configura o evento de clique nos botões
-btnNext.onclick = function () {
-    displayNextImage()
-}
-
-btnPrev.onclick = function () {
-    displayPrevImage()
-}
-
-// Configura os eventos de mouseover e mouseout nas imagens
-for(let i = 0; i < images.length; i++) {
-    images[i].onmouseover = function () {
+for (let i = 0; i < images.length; i++) {
+    images[i].onmouseover = () => {
         stopSlide()
     }
 
     images[i].onmouseout = () => {
-        slideInterval = setInterval(displayNextImage, 2000)
+        automaticSlide = setInterval(nextImage, 2000)
     }
 }
 
-// Configura os eventos de mouseover e mouseout nos botões
-btnNext.onmouseover = function () {
+btnNext.onclick = () => {
+    nextImage()
+}
+
+btnPrev.onclick = () => {
+    prevImage()
+}
+
+btnNext.onmouseover = () => {
     stopSlide()
 }
 
-btnNext.onmouseout = function () {
-    slideInterval = setInterval(() => {
-        displayNextImage()
-    }, 2000)
-}
-
-btnPrev.onmouseover = function () {
+btnPrev.onmouseover = () => {
     stopSlide()
 }
 
-btnPrev.onmouseout = function () {
-    slideInterval = setInterval(() => {
-        displayNextImage()
-    }, 2000)
-}
-
-// Configura os eventos de mouseover e mouseout nos botões de indicação
-containerIndicators.onmouseover = function () {
+containerIndicators.onmouseover = () => {
     stopSlide()
 }
 
-containerIndicators.onmouseout = function () {
-    slideInterval = setInterval(() => {
-        displayNextImage()
-    }, 2000)
+btnPrev.onmouseout = () => {
+    automaticSlide = setInterval(nextImage, 2000)
 }
 
-// Cria os botões de indicação das imagens
-createIndicatorButtons()
+btnNext.onmouseout = () => {
+    automaticSlide = setInterval(nextImage, 2000)
+}
 
-// Armazena os botões de indicação em uma variável
-let radioButtons = document.querySelectorAll('div#containerIndicators > input[type=radio]')
+containerIndicators.onmouseout = () => {
+    automaticSlide = setInterval(nextImage, 2000)
+}
 
-// Inicia o slide automático
-slideInterval = setInterval(() => {
-    displayNextImage()
-}, 2000)
+let automaticSlide = setInterval(nextImage, 2000)
 
-// Exibe a primeira imagem
+createIndicators()
+let radioIndicators = document.querySelectorAll('div#containerIndicators > input[type=radio]')
 displayCurrentImage()
-

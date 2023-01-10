@@ -5,41 +5,51 @@
     padding: 0;
 }
 
-div.sliderContainer {
+body {
+    width: 100vw;
+}
+
+div.slideArea {
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
-div#caroussel {
+div.slideArea>div#caroussel {
     position: relative;
-}
-
-div#caroussel > button#prev {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    margin-left: 10px;
-    font-size: xx-large;
-    background-color: transparent;
-    border: none;
-    color: white;
-}
-
-div#caroussel > button#next {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    margin-right: 10px;
-    font-size: xx-large;
-    background-color: transparent;
-    border: none;
-    color: white;
-}
-
-div.sliderContainer > #containerIndicators {
-    position: absolute;
-    margin-bottom: 1%;
-    align-self: flex-end;
     
+}
+
+img {
+    object-fit: cover;
+    width: 640px;
+    height: 360px;
+}
+
+div.slideArea>div#caroussel>button#prev {
+    position: absolute;
+    top: 50%;
+    font-size: xx-large;
+    color: white;
+    background-color: transparent;
+    border: none;
+    margin-left: 10px;
+}
+
+div.slideArea>div#caroussel>button#next {
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    font-size: xx-large;
+    color: white;
+    background-color: transparent;
+    border: none;
+    margin-right: 10px;
+}
+
+div.slideArea>div#caroussel>div#containerIndicators {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+
+    transform: translate(-50%);
 }
